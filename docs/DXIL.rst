@@ -515,33 +515,55 @@ Additional shader properties are specified via tag-value pair list, which is the
 Shader Flags
 ------------
 
-Shaders have additional flags that covey their capabilities via tag-value pair with tag kDxilShaderFlagsTag (0), followed by an i64 bitmask integer. The bits have the following meaning:
+Shaders have additional flags that covey their capabilities via tag-value pair with tag kDxilShaderFlagsTag (0), followed by an i64 bitmask integer.
+Certain flags also have minimum Shader Model (SM) requirements.
+The bits have the following meaning:
 
-=== =====================================================================
-Bit Description
-=== =====================================================================
-0   Disable shader optimizations
-1   Disable math refactoring
-2   Shader uses doubles
-3   Force early depth stencil
-4   Enable raw and structured buffers
-5   Shader uses min-precision, expressed as half and i16
-6   Shader uses double extension intrinsics
-7   Shader uses MSAD
-8   All resources must be bound for the duration of shader execution
-9   Enable view port and RT array index from any stage feeding rasterizer
-10  Shader uses inner coverage
-11  Shader uses stencil
-12  Shader uses intrinsics that access tiled resources
-13  Shader uses relaxed typed UAV load formats
-14  Shader uses Level9 comparison filtering
-15  Shader uses up to 64 UAVs
-16  Shader uses UAVs
-17  Shader uses CS4 raw and structured buffers
-18  Shader uses Rasterizer Ordered Views
-19  Shader uses wave intrinsics
-20  Shader uses int64 instructions
-=== =====================================================================
+=== ==== =====================================================================
+Bit SM   Description
+=== ==== =====================================================================
+0        Disable shader optimizations
+1        Disable math refactoring
+2        Shader uses doubles
+3        Force early depth stencil
+4        Enable raw and structured buffers
+5        Enable min-precision mode for half and i16 arithmetic. (Mutually exclusive with native low-precision data types)
+6        Shader uses double extension intrinsics
+7        Shader uses MSAD
+8        All resources must be bound for the duration of shader execution
+9        Enable view port and RT array index from any stage feeding rasterizer
+10       Shader uses inner coverage
+11       Pixel shader uses stencil
+12       Shader uses intrinsics that access tiled resources
+13       Shader uses relaxed typed UAV load formats
+14       Shader uses Level9 comparison filtering
+15       Shader uses up to 64 UAVs
+16       Shader uses UAVs
+17       Shader uses CS4 raw and structured buffers
+18       Shader uses Rasterizer Ordered Views
+19       Shader uses wave intrinsics
+20       Shader uses int64 instructions
+21  6.1+ Shader uses View ID
+22  6.1+ Shader uses Barycentrics
+23  6.2+ Enable native low-precision data types for half and i16. (Mutually exclusive with min-precision mode)
+24  6.4+ Shader uses Variable-Rate Shading
+25  6.5+ Shader uses inline raytracing (DXR 1.1)
+26  6.5+ Shader uses sampler feedback
+27  6.6+ Shader uses atomic int64 instructions on typed resources
+28  6.6+ Shader uses atomic int64 instructions on group-shared resources
+29  6.6+ Mesh or amp shader uses derivatives
+30  6.6+ Shader indexes into a resource descriptor heap
+31  6.6+ Shader indexes into a sampler descriptor heap
+32  6.6+ Shader uses atomic int64 instructions on heap resources
+33  6.7+ Any UAV may not alias any other UAV in the shader
+34  6.7+ Shader uses advanced texture operations
+35  6.7+ Shader uses writeable MSAA textures
+36  6.9+ <Reserved>
+37  6.8+ Shader uses SampleCmpGrad or SampleCmpBias
+38  6.8+ Shader uses extended command info
+39  6.8+ Function uses derivatives
+40  6.8+ Function requires a visible group
+=== ==== =====================================================================
 
 Geometry Shader
 ---------------
